@@ -57,8 +57,8 @@ layout = html.Div(
         dbc.Col([
         dcc.RangeSlider(id='page1-the_year',
                 min=2000,
-                max=2020,
-                value=[2000,2020],
+                max=2021,
+                value=[2000,2021],
                 marks=mark_values,
                 step=1,
                 persistence=True,
