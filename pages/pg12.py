@@ -7,21 +7,17 @@ from dash import dcc, html, register_page, ctx, no_update
 from dash_extensions.enrich import Output, Input, State, callback
 
 dash.register_page(__name__,
-                   path='/brecha-salarial-genero',  # represents the url text
-                   name='Brecha salarial condicionada',  # name of page, commonly used as name of link
-                   title='Brecha salarial condicionada'  # epresents the title of browser's tab
+                   path='/ingreso-laboral',  # represents the url text
+                   name='Ingreso laboral',  # name of page, commonly used as name of link
+                   title='Ingreso laboral'  # epresents the title of browser's tab
 )
 
-
 # page 1 data
-df = pd.read_csv("datasets/brecha_salarial_genero.csv")
+df = pd.read_csv("datasets/ingreso_laboral.csv")
 df['indicador'] = df['indicador'].astype(str)
 df['pais'] = df['pais'].astype(str)
 df['comparacion_por'] = df['comparacion_por'].astype(str)
 df['ano'] = df['ano'].astype(int)
-
-# Definimos el indicador que vamos a utilizar (de acuerdo a la página)
-df = df.query(f"indicador == 'Brecha salarial condicionada'")
 
 mark_values = {2000:'2000',2001:'2001',2002:'2002',
                 2003:'2003',2004:'2004',2005:'2005',
@@ -94,9 +90,14 @@ def update_graphs(pais_v, comparacion_por_v, years_chosen):
     indicador = dff['indicador'].iat[0]
     detalle_indicador_v = dff['detalle_indicador'].iat[0]
     disclaimer = dff['disclaimer'].iat[0]
-    fig_line = px.line(dff, x='ano', y='valor', color='pais2', error_y='valor_errorestandar',
-    line_dash= 'desagregacion', symbol= 'desagregacion',
-    labels=dict(ano="Año", valor="", pais2="País", indicador="Indicador", desagregacion="Desagregación")).update_xaxes(type='category').update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    if comparacion_por_v == 'Brecha mujeres - hombres':
+        fig_line = px.line(dff, x='ano', y='valor', color='pais2', error_y='valor_errorestandar',
+        symbol= 'desagregacion',
+        labels=dict(ano="Año", valor="", pais2="País", indicador="Indicador", desagregacion="Desagregación")).update_xaxes(type='category').update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    else:
+        fig_line = px.line(dff, x='ano', y='valor', color='pais2',
+        line_dash= 'desagregacion', symbol= 'desagregacion',
+        labels=dict(ano="Año", valor="", pais2="País", indicador="Indicador", desagregacion="Desagregación")).update_xaxes(type='category').update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig_line.update_traces(line=dict(width=2), 
         marker={'size': 10})
     fig_line.update_layout(

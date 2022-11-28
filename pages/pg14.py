@@ -7,21 +7,18 @@ from dash import dcc, html, register_page, ctx, no_update
 from dash_extensions.enrich import Output, Input, State, callback
 
 dash.register_page(__name__,
-                   path='/adultos-con-alta-calificacion',  # represents the url text
-                   name='Adultos con alta calificación',  # name of page, commonly used as name of link
-                   title='Adultos con alta calificación'  # epresents the title of browser's tab
+                   path='/anios-educacion',  # represents the url text
+                   name='Años de educación',  # name of page, commonly used as name of link
+                   title='Años de educación'  # epresents the title of browser's tab
 )
 
 
 # page 1 data
-df = pd.read_csv("datasets/calificacion_alta.csv")
+df = pd.read_csv("datasets//anios_educ.csv")
 df['indicador'] = df['indicador'].astype(str)
 df['pais'] = df['pais'].astype(str)
 df['comparacion_por'] = df['comparacion_por'].astype(str)
 df['ano'] = df['ano'].astype(int)
-
-# Definimos el indicador que vamos a utilizar (de acuerdo a la página)
-df = df.query(f"indicador == 'Adultos con alta calificación'")
 
 mark_values = {2000:'2000',2001:'2001',2002:'2002',
                 2003:'2003',2004:'2004',2005:'2005',

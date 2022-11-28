@@ -20,9 +20,6 @@ df['pais'] = df['pais'].astype(str)
 df['comparacion_por'] = df['comparacion_por'].astype(str)
 df['ano'] = df['ano'].astype(int)
 
-# Definimos el indicador que vamos a utilizar (de acuerdo a la página)
-df = df.query(f"indicador == 'Trabajadores/as sin remuneración'")
-
 mark_values = {2000:'2000',2001:'2001',2002:'2002',
                 2003:'2003',2004:'2004',2005:'2005',
                 2006:'2006',2007:'2007',2008:'2008',

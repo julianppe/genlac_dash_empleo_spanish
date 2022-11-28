@@ -22,8 +22,6 @@ df['indicador'] = df['indicador'].astype(str)
 df['pais'] = df['pais'].astype(str)
 df['comparacion_por'] = df['comparacion_por'].astype(str)
 df['ano'] = df['ano'].astype(int)
-# Definimos el indicador que vamos a utilizar (de acuerdo a la página)
-df = df.query(f"indicador == 'Tasa de participación laboral'")
 
 # Armar loop:
 mark_values = {2000:'2000',2001:'2001',2002:'2002',
