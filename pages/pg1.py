@@ -22,6 +22,7 @@ df['indicador'] = df['indicador'].astype(str)
 df['pais'] = df['pais'].astype(str)
 df['comparacion_por'] = df['comparacion_por'].astype(str)
 df['ano'] = df['ano'].astype(int)
+df['valor'] = df['valor'].round(decimals = 2)
 
 # Armar loop:
 mark_values = {2000:'2000',2001:'2001',2002:'2002',
